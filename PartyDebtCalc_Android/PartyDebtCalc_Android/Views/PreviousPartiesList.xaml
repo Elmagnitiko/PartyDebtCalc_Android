@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PartyDebtCalc_Android.Views.PreviousPartiesList"
+             Title="Previous parties list">
+    
+    <StackLayout>
+        <ListView ItemsSource="{Binding PreviousParties}"
+                  SelectedItem="{Binding SelectedParty, Mode=TwoWay}"
+                  HasUnevenRows="True"
+                  SelectionMode="Single"
+                  Margin="10">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Label Text="{Binding Date, StringFormat='{0:dd.MM.yyyy HH:mm:ss}'}"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="Medium"
+                                   TextColor="#CD541C"
+                                   HeightRequest="44"/>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

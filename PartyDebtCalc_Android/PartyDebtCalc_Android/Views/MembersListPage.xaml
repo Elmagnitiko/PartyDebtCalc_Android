@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PartyDebtCalc_Android.Views.MembersListPage"
+             Title="Members list">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add Member"
+                     Order="Primary"
+                     Command="{Binding CreateMemberCommand}"/>
+        <ToolbarItem Text="Calculate"
+                     Command="{Binding CalculateDebtsCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <ListView ItemsSource="{Binding Members}"
+                  SelectedItem="{Binding SelectedMember, Mode=TwoWay}"
+                  HasUnevenRows="True"
+                  SelectionMode="Single">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout Padding="6">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Name: "
+                                           FontSize="Small"/>
+                                    <Label Text="{Binding Name}" 
+                                           FontSize="Medium" 
+                                           TextColor="#CD541C"/>
+                                </StackLayout>
+                                
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Spent: "
+                                           FontSize="Small"/>
+                                    <Label Text="{Binding Spent}" 
+                                           FontSize="Medium"
+                                           TextColor="#2424E4"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

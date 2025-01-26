@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PartyDebtCalc_Android.Views.MemberPage"
+             xmlns:local="clr-namespace:PartyDebtCalc_Android"
+             Title="Member info">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:MultiValueConverter x:Key="MultiValueConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <StackLayout>
+            <Label Text="Name: "
+                   FontSize="Small"/>
+            
+            <Entry x:Name="MemberNameEnrty"
+                   Placeholder="Enter name here"
+                   Keyboard="Text"
+                   ClearButtonVisibility="WhileEditing"
+                   MaxLength="15"
+                   Text="{Binding Name}">
+                   <Entry.Behaviors>
+                       <local:StringValidationBehavior />
+                   </Entry.Behaviors>
+            </Entry>
+            
+            <Label Text="Spent: "
+                   FontSize="Small"/>
+            
+            <Entry x:Name="MoneySpentEntry"
+                   Keyboard="Numeric"
+                   ClearButtonVisibility="WhileEditing"
+                   MaxLength="9"
+                   Text="{Binding Spent}">
+                   <Entry.Behaviors>
+                       <local:NumericValidationBehavior />
+                   </Entry.Behaviors>
+            </Entry>
+        </StackLayout>
+        
+        <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="CenterAndExpand">
+            <Button x:Name="SaveButton"
+                    Text="Save member"
+                    TextColor="Green"
+                    Command="{Binding ListViewModel.SaveMemberCommand}"
+                    CommandParameter="{Binding}"
+                    BackgroundColor="White"
+                    BorderColor="#CBCBCB"
+                    BorderWidth="1"
+                    CornerRadius="6">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                            <Binding Path="Behaviors[0].IsValid"
+                                             Source="{x:Reference MemberNameEnrty}"/>
+                            <Binding Path="Behaviors[0].IsValid"
+                                             Source="{x:Reference MoneySpentEntry}"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+            </Button>
+            <Button Text="Delete member"
+                    TextColor="Red"
+                    Command="{Binding ListViewModel.DeleteMemberCommand}"
+                    CommandParameter="{Binding}"
+                    BackgroundColor="White"
+                    BorderColor="#CBCBCB"
+                    BorderWidth="1"
+                    CornerRadius="6"/>
+            <Button Text="Back"
+                    Command="{Binding Path = ListViewModel.BackCommand}"
+                    BackgroundColor="White"
+                    BorderColor="#CBCBCB"
+                    BorderWidth="1"
+                    CornerRadius="6"/>
+        </StackLayout>
+    </StackLayout>
+    
+</ContentPage>
